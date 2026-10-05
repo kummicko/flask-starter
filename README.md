@@ -121,3 +121,8 @@ Per-project checklist:
 
 The `src/app` package is deliberately generic, so `flask --app app run` and all
 imports keep working in every project without renaming.
+
+## Contributing and license
+
+Contributions are welcome, see [CONTRIBUTING.md](CONTRIBUTING.md).
+Released under the [MIT License](LICENSE).
