@@ -48,6 +48,19 @@ uv run flask --app app run --debug
 ```bash
 uv run --extra desktop desktop
 # or: uv run --extra desktop python -m app.desktop
+
+## htmx
+
+[htmx](https://htmx.org) is included as a vendored file at
+`src/app/static/vendor/htmx/htmx.min.js` (no CDN, works offline) and loaded
+in `base.html`.
+
+Convention: routes that serve htmx requests return **HTML fragments**, kept in
+`templates/<name>/partials/`. See the `/time` route and the button in
+`templates/main/index.html` for a working example.
+
+To update htmx, replace the file with a newer build from
+https://github.com/bigskysoftware/htmx/releases.
 ```
 
 ## Optional: desktop mode (pywebview)
