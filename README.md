@@ -1,16 +1,18 @@
 # Flask Starter
 
 A starter for Flask projects: **uv** for dependencies, a **src layout** with
-a blueprint structure, **Tailwind CSS + daisyUI** (no Node), and an optional
-**pywebview** desktop window.
+a blueprint structure, **Tailwind CSS + daisyUI** (no Node), **htmx** for dynamic pages, and an
+optional **pywebview** desktop window.
 
 ```
 src/app/
 ├── __init__.py          # create_app() + register_blueprints()
 ├── desktop.py           # optional pywebview launcher
 ├── blueprints/main/     # __init__.py (bp) + routes.py
-├── templates/           # base.html, main/index.html
-└── static/css/          # input.css (+ tailwindcss binary, daisyUI, output.css after setup)
+├── templates/           # base.html, main/index.html, main/partials/
+└── static/
+    ├── css/             # input.css (+ tailwindcss binary, daisyUI, output.css after setup)
+    └── vendor/htmx/     # htmx.min.js (vendored, no CDN)
 ```
 
 ## Quick start
@@ -48,20 +50,21 @@ uv run flask --app app run --debug
 ```bash
 uv run --extra desktop desktop
 # or: uv run --extra desktop python -m app.desktop
+```
 
 ## htmx
 
-[htmx](https://htmx.org) is included as a vendored file at
-`src/app/static/vendor/htmx/htmx.min.js` (no CDN, works offline) and loaded
-in `base.html`.
+[htmx](https://htmx.org) is vendored at `src/app/static/vendor/htmx/htmx.min.js`
+(no CDN, works offline) and loaded in `base.html`.
 
 Convention: routes that serve htmx requests return **HTML fragments**, kept in
 `templates/<name>/partials/`. See the `/time` route and the button in
 `templates/main/index.html` for a working example.
 
-To update htmx, replace the file with a newer build from
-https://github.com/bigskysoftware/htmx/releases.
-```
+To update htmx, replace the file with a newer build from the
+[htmx releases](https://github.com/bigskysoftware/htmx/releases). Run
+`htmx.version` in the browser console to see which version is currently loaded.
+htmx is BSD 2-Clause licensed; keep its `LICENSE` next to the file.
 
 ## Optional: desktop mode (pywebview)
 
