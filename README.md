@@ -120,22 +120,50 @@ Every blueprint can name its variable `bp`; only the string passed to
 
 ## Using this as a template
 
-On GitHub, tick **Settings → General → Template repository**, then:
+On GitHub, tick **Settings → General → Template repository**. Then either click
+**Use this template → Create a new repository** on the repo page, or from the terminal:
 
 ```bash
-gh repo create my-new-app --private --template YOUR_USER/flask-starter --clone
+gh repo create my-new-app --private --template kummicko/flask-starter --clone
 cd my-new-app
 ```
 
-Per-project checklist:
+### What a new project gets, and what's missing
+
+A template copies the **files**, not the history. The new repo starts clean:
+no commit history, tags, releases or issues from the starter.
+
+Anything listed in `.gitignore` is also missing, because it was never committed.
+Rebuild it after cloning:
+
+| Missing (gitignored)                                   | How to get it back                    |
+|--------------------------------------------------------|---------------------------------------|
+| `.venv/`                                               | `uv sync` (add `--extra desktop` if needed) |
+| `.env`                                                 | `cp .env.example .env`, then set a real `FLASK_SECRET_KEY` |
+| `tailwindcss` binary, `daisyui*.mjs`, `output.css`     | run the daisyUI install script (see Quick start) |
+| `__pycache__/`                                         | created automatically when you run the app |
+
+Committed files do come along, including `uv.lock`, `input.css` and the vendored
+htmx in `static/vendor/htmx/`.
+
+### Per-project checklist
+
 1. Change `name` (and `description`) in `pyproject.toml`.
 2. Change the titles in `templates/base.html` and `desktop.py`.
-3. `uv sync` (add `--extra desktop` if needed).
-4. Run the daisyUI install script (see Quick start).
-5. `cp .env.example .env` and set a real `FLASK_SECRET_KEY`.
+3. Rebuild the missing files from the table above.
+4. Replace this README with one describing the new project.
+5. Edit or delete `LICENSE` and `CONTRIBUTING.md` if the new project isn't open source.
+6. Don't need desktop mode? Remove it (see the desktop section).
 
 The `src/app` package is deliberately generic, so `flask --app app run` and all
 imports keep working in every project without renaming.
+
+### Updates to the starter
+
+Projects created from a template don't receive later changes to the starter.
+To bring an improvement into an older project, copy the changes over by hand
+(for example by comparing files). The starter's release notes list what changed
+in each version.
 
 ## Contributing and license
 
