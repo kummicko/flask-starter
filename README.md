@@ -58,8 +58,7 @@ uv run --extra desktop desktop
 (no CDN, works offline) and loaded in `base.html`.
 
 Convention: routes that serve htmx requests return **HTML fragments**, kept in
-`templates/<name>/partials/`. See the `/time` route and the button in
-`templates/main/index.html` for a working example.
+`templates/<name>/partials/`.
 
 To update htmx, replace the file with a newer build from the
 [htmx releases](https://github.com/bigskysoftware/htmx/releases). Run
